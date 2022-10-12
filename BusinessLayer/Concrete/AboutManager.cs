@@ -3,12 +3,9 @@ using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace BusinessLayer.Business
+namespace BusinessLayer.Concrete
 {
     public class AboutManager : IAboutService
     {
@@ -31,7 +28,7 @@ namespace BusinessLayer.Business
 
         public About Get(int id)
         {
-            return _aboutDal.Get(x=>x.AboutID==id);
+            return _aboutDal.Get(x => x.AboutID == id);
         }
 
         public List<About> GetAll(Expression<Func<About, bool>> filter = null)
