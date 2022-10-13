@@ -1,13 +1,11 @@
-﻿using EntityLayer.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Utilities.Results;
+using EntityLayer.Concrete;
 
 namespace BusinessLayer.Abstract
 {
-    public interface IFeatureService:IGenericService<Feature>
+    public interface IFeatureService : IGenericService<Feature>
     {
+        //daha sonra generic kısma taşı
+        IResult Add(Feature entity);
     }
 }

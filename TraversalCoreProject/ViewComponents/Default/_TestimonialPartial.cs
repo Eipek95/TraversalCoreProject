@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TraversalCoreProject.ViewComponents.Default
 {
-    public class _FeaturePartial : ViewComponent
+    public class _TestimonialPartial : ViewComponent
     {
-        FeatureManager featureManager = new FeatureManager(new EfFeatureDal());
         public IViewComponentResult Invoke()
         {
-            //var values = featureManager.GetAll();
-            return View();
+            TestimonialManager testimonialManager = new TestimonialManager(new EfTestmonialDal());
+            var result = testimonialManager.GetAll();
+            return View(result);
         }
     }
 }
