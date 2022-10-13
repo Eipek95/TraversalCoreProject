@@ -3,8 +3,7 @@
     //Temel voidler 
     public interface IResult
     {
-        bool Success { get; }
+        bool IsSucess { get; }
         string Message { get; }
-
     }
 }

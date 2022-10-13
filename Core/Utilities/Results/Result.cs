@@ -3,17 +3,17 @@
     public class Result : IResult
     {
         //iki parametreli olarak gönderirsen success kısmınıda  çaılştır
-        public Result(bool success, string message) : this(success)
+        public Result(bool isSucess, string message) : this(isSucess)
         {
             Message = message;
         }
-        public Result(bool success)
+        public Result(bool isSucess)
         {
-            Success = success;
+            IsSucess = isSucess;
         }
 
 
-        public bool Success { get; }
+        public bool IsSucess { get; }
 
         public string Message { get; }//readonly normalde set edilemez ama ctor içinde set edilebilir
     }

@@ -1,4 +1,6 @@
 ﻿using BusinessLayer.Abstract;
+using Core.Utilities.Results;
+using Core.Utilities.Results.DataInResult;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
 using System;
@@ -16,27 +18,27 @@ namespace BusinessLayer.Concrete
             _testmonialDal = testmonialDal;
         }
 
-        public void Add(Testmonial entity)
+        public IResult Add(Testmonial entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Testmonial entity)
+        public IResult Delete(Testmonial entity)
         {
             throw new NotImplementedException();
         }
 
-        public Testmonial Get(int id)
+        public IDataResult<Testmonial> Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Testmonial> GetAll(Expression<Func<Testmonial, bool>> filter = null)
+        public IDataResult<List<Testmonial>> GetAll(Expression<Func<Testmonial, bool>> filter = null)
         {
-            return _testmonialDal.GetAll();
+            throw new NotImplementedException();
         }
 
-        public void Update(Testmonial entity)
+        public IResult Update(Testmonial entity)
         {
             throw new NotImplementedException();
         }

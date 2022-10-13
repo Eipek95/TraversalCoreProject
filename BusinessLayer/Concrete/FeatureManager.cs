@@ -1,5 +1,7 @@
 ﻿using BusinessLayer.Abstract;
+using BusinessLayer.Constants;
 using Core.Utilities.Results;
+using Core.Utilities.Results.DataInResult;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
 using System;
@@ -16,40 +18,34 @@ namespace BusinessLayer.Concrete
             _featureDal = featureDal;
         }
 
-        public void Add(Feature entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(Feature entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Feature Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Feature> GetAll(Expression<Func<Feature, bool>> filter = null)
-        {
-            return _featureDal.GetAll(filter);
-        }
-
-        public void Update(Feature entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        //aşagısı generice eklenince değişecek sadece deneme amaçlı yapılıyor
-        IResult IFeatureService.Add(Feature entity)
+        public IResult Add(Feature entity)
         {
             if (entity.Description.Length < 2)
             {
                 return new ErrorResult("Feature ismi en az iki karekter olmalı");
             }
             _featureDal.Add(entity);
-            return new Result(true, "feature eklendi");
+            return new SuccessResult(Messages.FeatureAdded);
+        }
+
+        public IResult Delete(Feature entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDataResult<Feature> Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDataResult<List<Feature>> GetAll(Expression<Func<Feature, bool>> filter = null)
+        {
+            return new DataResult<List<Feature>>(_featureDal.GetAll(), true, Messages.FeatureListed);
+        }
+
+        public IResult Update(Feature entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

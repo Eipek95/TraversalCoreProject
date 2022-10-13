@@ -1,4 +1,6 @@
 ﻿using BusinessLayer.Abstract;
+using Core.Utilities.Results;
+using Core.Utilities.Results.DataInResult;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
 using System;
@@ -16,29 +18,29 @@ namespace BusinessLayer.Concrete
             _aboutDal = aboutDal;
         }
 
-        public void Add(About entity)
+        public IResult Add(About entity)
         {
-            _aboutDal.Add(entity);
+            throw new NotImplementedException();
         }
 
-        public void Delete(About entity)
+        public IResult Delete(About entity)
         {
-            _aboutDal.Delete(entity);
+            throw new NotImplementedException();
         }
 
-        public About Get(int id)
+        public IDataResult<About> Get(int id)
         {
-            return _aboutDal.Get(x => x.AboutID == id);
+            throw new NotImplementedException();
         }
 
-        public List<About> GetAll(Expression<Func<About, bool>> filter = null)
+        public IDataResult<List<About>> GetAll(Expression<Func<About, bool>> filter = null)
         {
-            return _aboutDal.GetAll();
+            throw new NotImplementedException();
         }
 
-        public void Update(About entity)
+        public IResult Update(About entity)
         {
-            _aboutDal.Update(entity);
+            throw new NotImplementedException();
         }
     }
 }

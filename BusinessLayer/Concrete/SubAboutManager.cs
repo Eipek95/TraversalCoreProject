@@ -1,4 +1,6 @@
 ﻿using BusinessLayer.Abstract;
+using Core.Utilities.Results;
+using Core.Utilities.Results.DataInResult;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
 using System;
@@ -16,27 +18,27 @@ namespace BusinessLayer.Concrete
             _subAboutDal = subAboutDal;
         }
 
-        public void Add(SubAbout entity)
+        public IResult Add(SubAbout entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(SubAbout entity)
+        public IResult Delete(SubAbout entity)
         {
             throw new NotImplementedException();
         }
 
-        public SubAbout Get(int id)
+        public IDataResult<SubAbout> Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<SubAbout> GetAll(Expression<Func<SubAbout, bool>> filter = null)
+        public IDataResult<List<SubAbout>> GetAll(Expression<Func<SubAbout, bool>> filter = null)
         {
-            return _subAboutDal.GetAll();
+            throw new NotImplementedException();
         }
 
-        public void Update(SubAbout entity)
+        public IResult Update(SubAbout entity)
         {
             throw new NotImplementedException();
         }
