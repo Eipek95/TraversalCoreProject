@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Abstract;
+using BusinessLayer.Constants;
 using Core.Utilities.Results;
 using Core.Utilities.Results.DataInResult;
 using DataAccessLayer.Abstract;
@@ -35,7 +36,11 @@ namespace BusinessLayer.Concrete
 
         public IDataResult<List<Testmonial>> GetAll(Expression<Func<Testmonial, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            if (DateTime.Now.Year == 2025)
+            {
+                return new ErrorDataResult<List<Testmonial>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<Testmonial>>(_testmonialDal.GetAll(), "Listelendi");
         }
 
         public IResult Update(Testmonial entity)

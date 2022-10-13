@@ -10,7 +10,7 @@ namespace TraversalCoreProject.ViewComponents.Default
         public IViewComponentResult Invoke()
         {
             var values = destinationManager.GetAll();
-            return View(values);
+            return View(values.Data);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace BusinessLayer.Concrete
 
         public IDataResult<List<SubAbout>> GetAll(Expression<Func<SubAbout, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<SubAbout>>(_subAboutDal.GetAll());
         }
 
         public IResult Update(SubAbout entity)
