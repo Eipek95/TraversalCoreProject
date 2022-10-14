@@ -9,8 +9,10 @@ namespace TraversalCoreProject.ViewComponents.Default
         SubAboutManager subAboutManager = new SubAboutManager(new EfSubAboutDal());
         public IViewComponentResult Invoke()
         {
+
             var result = subAboutManager.GetAll();
             return View(result.Data);
+
         }
     }
 }

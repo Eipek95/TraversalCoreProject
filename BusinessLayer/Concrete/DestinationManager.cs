@@ -30,7 +30,7 @@ namespace BusinessLayer.Concrete
 
         public IDataResult<Destination> Get(int id)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<Destination>(_destinationDal.Get(x => x.DestinationID == id));
         }
 
         public IDataResult<List<Destination>> GetAll(Expression<Func<Destination, bool>> filter = null)
