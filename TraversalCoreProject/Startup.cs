@@ -1,5 +1,6 @@
 using DataAccessLayer.Concrete.EntityFramework;
 using EntityLayer.Concrete;
+using EntityLayer.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,7 +27,7 @@ namespace TraversalCoreProject
 
             //identity configuration
             services.AddDbContext<Context>();
-            services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>();
+            services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddErrorDescriber<CustomIdentityValidator>().AddEntityFrameworkStores<Context>();
             services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()

@@ -55,34 +55,37 @@
                     <form method="post" class="signin-form">
                         <div class="form-input">
                             <label>Adınız</label>
-                            <input type="text"  asp-for="Name" />
+                            <input type="text" asp-for="Name" />
                             <span asp-validation-for="Name" class="text-danger" style="color:#ff0000"></span>
                         </div>
                         <div class="form-input">
                             <label>Soyadınız</label>
-                            <input type="text"  asp-for="Surname" />
-                            <span asp-validation-for="Surname" class="text-danger" style="color:  #ff0000"></span>
+                            <input type="text" asp-for="Surname" />
+                            <span asp-validation-for="Surname" class="text-danger"></span>
                         </div>
                         <div class="form-input">
                             <label>Kullanıcı Adınız</label>
-                            <input type="text"  asp-for="Username" />
-                            <span asp-validation-for="Username" class="text-danger" style="color:  #ff0000"></span>
+                            <input type="text" asp-for="Username" />
+                            <span asp-validation-for="Username" class="text-danger"></span>
                         </div>
                         <div class="form-input">
                             <label>Mail Adresiniz</label>
-                            <input type="email"  asp-for="Mail" />
-                            <span asp-validation-for="Mail" class="text-danger" style="color:  #ff0000"></span>
+                            <input type="email" asp-for="Mail" />
+                            <span asp-validation-for="Mail" class="text-danger"></span>
                         </div>
                         <div class="form-input">
                             <label>Şifre</label>
-                            <input type="password"  asp-for="Password" />
-                            <span asp-validation-for="Password" class="text-danger" style="color:  #ff0000"></span>
+                            <input type="password" asp-for="Password" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
 
                         </div>
-                         <div class="form-input">
-                           <label>Şifre Tekrar</label>
-                            <input type="password"  asp-for="ConfirmPassword" />
-                            <span asp-validation-for="ConfirmPassword" class="text-danger" style="color:  #ff0000"></span>
+                        <div class="form-input">
+                            <label>Şifre Tekrar</label>
+                            <input type="password" asp-for="ConfirmPassword" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+                        </div>
+                        <div class="text-danger" asp-validation-summary="ModelOnly">
 
                         </div>
                         <label class="container">
@@ -107,3 +110,9 @@
 </body>
 
 </html>
+
+<style>
+    .text-danger {
+        color: red;
+    }
+</style>
