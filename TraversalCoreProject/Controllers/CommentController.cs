@@ -23,12 +23,12 @@ namespace TraversalCoreProject.Controllers
             var result = commentManager.Add(comment);
             if (result.IsSucess)
             {
-                TempData["AlertMessage"] = result.Message.Replace('ı', 'i');
+                TempData["AlertMessage"] = result.Message;
                 TempData["IsSuccess"] = "success";
                 Thread.Sleep(2000);
                 return RedirectToAction("Index", "Destination");
             }
-            TempData["AlertMessage"] = result.Message.Replace('ı', 'i');
+            TempData["AlertMessage"] = result.Message;
             Thread.Sleep(2000);
             TempData["IsSuccess"] = "error";
             return RedirectToAction("Index", "Destination");
