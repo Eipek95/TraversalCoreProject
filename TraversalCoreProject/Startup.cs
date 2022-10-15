@@ -27,7 +27,7 @@ namespace TraversalCoreProject
 
             //identity configuration
             services.AddDbContext<Context>();
-            services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddErrorDescriber<CustomIdentityValidator>().AddEntityFrameworkStores<Context>();
+            services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddErrorDescriber<CustomIdentityValidatorDto>().AddEntityFrameworkStores<Context>();
             services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()

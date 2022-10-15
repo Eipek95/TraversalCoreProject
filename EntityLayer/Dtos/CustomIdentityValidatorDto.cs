@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace EntityLayer.Dtos
 {
-    public class CustomIdentityValidator : IdentityErrorDescriber, IDto
+    public class CustomIdentityValidatorDto : IdentityErrorDescriber, IDto
     {
         //add startup in add
         public override IdentityError PasswordTooShort(int length)
