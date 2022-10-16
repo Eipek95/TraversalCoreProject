@@ -3,12 +3,12 @@
     ViewData["Title"] = "NewReservation";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
-    
+
 <h1>Yeni Rezervasyon Sayfası</h1>
 <form method="post">
     <div class="form-group">
         @Html.Label("Lokasyon")
-        @Html.DropDownListFor(x=>x.Destination,(List<SelectListItem>)ViewBag.v,new {@class="form-control"})
+     
     </div>
     <div class="form-group">
         @Html.Label("Kişi Sayısı")
@@ -24,3 +24,19 @@
     </div>
     <button class="btn btn-outline-success">Rezervasyon Yap</button>
 </form>
+<script>
+    var data = '@TempData["AlertMessage"]'
+    if (data == 'elma') {
+        window.onload = (function () {
+            swal({
+                title: "Dikkat!",
+                text: "Rezervasyonunuz onay bekliyor.Rezervasyon onaylanma süreci için Güncel Rezervasyonlarım menusunu takip etmeyi unutmayın.",
+                icon: "info",
+                button: "Tamam",
+            });
+        });
+    }
+
+</script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

@@ -1,0 +1,16 @@
+﻿@model List<EntityLayer.Concrete.Reservation>
+@{
+    ViewData["Title"] = "MyCurrentReservation";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h1>Aktif Rezervasyonlarımız</h1>
+
+<div class="container">
+    @foreach (var item in Model)
+    {
+        <h5>@item.Description</h5>
+        <h5>@item.PersonCount</h5>
+        <h5>@item.Status</h5>
+    }
+</div>

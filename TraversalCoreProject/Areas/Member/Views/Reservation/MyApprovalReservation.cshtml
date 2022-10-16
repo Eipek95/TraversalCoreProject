@@ -1,0 +1,43 @@
+﻿@using EntityLayer.Dtos
+@model List<ReservationDetailsDto>
+@{
+    ViewData["Title"] = "MyApprovalReservation";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h1>Onay Bekleyen Rezarvasyonlar</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Lokasyon</th>
+        <th>Kişi Sayısı</th>
+        <th>Rezervasyon Tarihi</th>
+        <th>Durum</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.id</td>
+            <td>@item.Destination.City</td>
+            <td>@item.PersonCount</td>
+            <td>@item.ReservationDate</td>
+            <td>@item.Status</td>
+        </tr>
+    }
+</table>
+
+<script>
+    var data = '@TempData["AlertMessage"]'
+    if (data == "True") {
+        window.onload = (function () {
+            swal({
+                title: "Dikkat!",
+                text: "Verileriniz Listelendi",
+                icon: "success",
+                button: "Tamam",
+            });
+        });
+    }
+ </script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
