@@ -22,5 +22,6 @@ namespace DataAccessLayer.Concrete.EntityFramework
         public DbSet<SubAbout> SubAbouts { get; set; }
         public DbSet<Testmonial> Testmonials { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
     }
 }
