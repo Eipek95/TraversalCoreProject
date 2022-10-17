@@ -20,7 +20,8 @@ namespace BusinessLayer.Concrete
 
         public IResult Add(Destination entity)
         {
-            throw new NotImplementedException();
+            _destinationDal.Add(entity);
+            return new Result(true, "Rota Başarıyla Eklendi");
         }
 
         public IResult Delete(Destination entity)
@@ -40,7 +41,8 @@ namespace BusinessLayer.Concrete
 
         public IResult Update(Destination entity)
         {
-            throw new NotImplementedException();
+            _destinationDal.Update(entity);
+            return new Result(true, "Rota Başarıyla Güncellendi");
         }
     }
 }
