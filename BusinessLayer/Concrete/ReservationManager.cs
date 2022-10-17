@@ -45,19 +45,24 @@ namespace BusinessLayer.Concrete
             throw new NotImplementedException();
         }
 
-        public IDataResult<List<Reservation>> GetListApprovalReservation(int userId, string statusApproval)
-        {
-            return new SuccessDataResult<List<Reservation>>(_reservationDal.GetAll(x => x.AppUserID == userId && x.Status == statusApproval));
-        }
 
+        public IResult Update(Reservation entity)
+        {
+            throw new NotImplementedException();
+        }
         public IDataResult<List<Reservation>> GetListWithReservationByWaitApproval(int id)
         {
             return new SuccessDataResult<List<Reservation>>(_reservationDal.GetListWithReservationByWaitApproval(id));
         }
 
-        public IResult Update(Reservation entity)
+        public IDataResult<List<Reservation>> GetListWithReservationByAccepted(int id)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<Reservation>>(_reservationDal.GetListWithReservationByAccepted(id));
+        }
+
+        public IDataResult<List<Reservation>> GetListWithReservationByPrevious(int id)
+        {
+            return new SuccessDataResult<List<Reservation>>(_reservationDal.GetListWithReservationByPrevious(id));
         }
     }
 }

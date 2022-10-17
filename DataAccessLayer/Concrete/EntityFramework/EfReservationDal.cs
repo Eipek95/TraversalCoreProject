@@ -39,12 +39,28 @@ namespace DataAccessLayer.Concrete.EntityFramework
 
         public List<Reservation> GetListWithReservationByAccepted(int id)
         {
-            throw new NotImplementedException();
+            using (var context = new Context())
+            {
+                return context.Reservations.Include
+                    (x => x.Destination)
+                    .Where(
+                    x => x.Status == "onaylandı" &&
+                    x.AppUserID == id)
+                    .ToList();
+            }
         }
 
         public List<Reservation> GetListWithReservationByPrevious(int id)
         {
-            throw new NotImplementedException();
+            using (var context = new Context())
+            {
+                return context.Reservations.Include
+                    (x => x.Destination)
+                    .Where(
+                    x => x.Status == "geçmiş rezervasyon" &&
+                    x.AppUserID == id)
+                    .ToList();
+            }
         }
 
         public List<Reservation> GetListWithReservationByWaitApproval(int id)
