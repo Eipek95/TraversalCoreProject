@@ -45,7 +45,7 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
         public IActionResult UpdateDestination(int id)
         {
             var getUpdatedData = destinationManager.Get(id);
-            return View(getUpdatedData);
+            return View(getUpdatedData.Data);
         }
         [HttpPost]
         public IActionResult UpdateDestination(Destination getUpdatedData)

@@ -26,7 +26,9 @@ namespace BusinessLayer.Concrete
 
         public IResult Delete(Destination entity)
         {
-            throw new NotImplementedException();
+            _destinationDal.Delete(entity);
+            return new Result(true, "Rota Başarıyla Silindi");
+
         }
 
         public IDataResult<Destination> Get(int id)
