@@ -34,23 +34,30 @@ namespace BusinessLayer.Concrete
 
         public IResult Delete(Comment entity)
         {
-            throw new NotImplementedException();
+            _commentDal.Delete(entity);
+            return new SuccessResult("Yorum Başarıyla silindi");
         }
 
         public IDataResult<Comment> Get(int id)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<Comment>(_commentDal.Get(x => x.CommentID == id));
         }
 
         public IDataResult<List<Comment>> GetAll(Expression<Func<Comment, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<Comment>>(_commentDal.GetAll());
         }
 
         public IDataResult<List<Comment>> GetAll(int destinationID)
         {
             return new SuccessDataResult<List<Comment>>(_commentDal.GetAll(x => x.DestinationID == destinationID));
         }
+
+        public List<Comment> GetListCommentWithDestination()
+        {
+            return _commentDal.GetListCommentWithDestination();
+        }
+
         public IResult Update(Comment entity)
         {
             throw new NotImplementedException();

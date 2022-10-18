@@ -1,3 +1,6 @@
+using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
+using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete.EntityFramework;
 using EntityLayer.Concrete;
 using EntityLayer.Dtos;
@@ -28,6 +31,8 @@ namespace TraversalCoreProject
             //identity configuration
             services.AddDbContext<Context>();
             services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>().AddErrorDescriber<CustomIdentityValidatorDto>().AddEntityFrameworkStores<Context>();
+            services.AddScoped<ICommentService, CommentManager>();
+            services.AddScoped<ICommentDal, EfCommentDal>();
             services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()
@@ -61,24 +66,15 @@ namespace TraversalCoreProject
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Default}/{action=Index}/{id?}");
-            });
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
                   name: "areas",
                   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                 );
-            });
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                  name: "areas",
-                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-                );
-            });
 
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Default}/{action=Index}/{id?}"
+                    );
+            });
         }
     }
 }
