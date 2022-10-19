@@ -30,7 +30,7 @@ namespace BusinessLayer.Concrete
 
         public IDataResult<Guide> Get(int id)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<Guide>(_guideDal.Get(x => x.GuideID == id));
         }
 
         public IDataResult<List<Guide>> GetAll(Expression<Func<Guide, bool>> filter = null)
@@ -40,7 +40,8 @@ namespace BusinessLayer.Concrete
 
         public IResult Update(Guide entity)
         {
-            throw new NotImplementedException();
+            _guideDal.Update(entity);
+            return new SuccessResult();
         }
     }
 }

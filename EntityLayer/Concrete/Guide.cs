@@ -1,14 +1,9 @@
 ﻿using Core.Entities;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntityLayer.Concrete
 {
-    public class Guide:IEntity
+    public class Guide : IEntity
     {
         [Key]
         public int GuideID { get; set; }
@@ -17,6 +12,6 @@ namespace EntityLayer.Concrete
         public string Image { get; set; }
         public string TwitterUrl { get; set; }
         public string InstagramUrl { get; set; }
-        public string Status { get; set; }
+        public bool Status { get; set; }
     }
 }
