@@ -22,7 +22,6 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult AddGuide()
         {
-
             return View();
         }
         [HttpPost]
@@ -53,6 +52,5 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             _guideService.Update(result.Data);
             return RedirectToAction("Index");
         }
-
     }
 }
