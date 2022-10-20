@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Diagnostics;
 using TraversalCoreProject.Models;
 
@@ -15,6 +16,8 @@ namespace TraversalCoreProject.Controllers
         }
         public IActionResult Privacy()
         {
+            DateTime d = Convert.ToDateTime(DateTime.Now.ToShortTimeString());
+            _logger.LogInformation(d + " Privacy Sayfası Çağrıldı");
             return View();
         }
 
