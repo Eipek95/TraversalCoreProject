@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Excel Raporlar Sayfası</h1>
+<br />
+
+<a asp-controller="Report" asp-action="StaticExcelReport" class="btn btn-outline-info">Statik Excel Raporlar</a>
+<a asp-controller="Report" asp-action="DestinationExcelReport" class="btn btn-outline-primary">Tur Rotaları Excel Raporları</a>
+<a asp-controller="Report" asp-action="StaticPdfReport" class="btn btn-outline-secondary">Statik Pdf Raporu</a>
+<a asp-controller="Report" asp-action="StaticCustomerReport" class="btn btn-outline-danger">Statik Müşteri Pdf Raporu</a>

@@ -20,7 +20,8 @@ namespace BusinessLayer.Concrete
 
         public IResult Add(Guide entity)
         {
-            throw new NotImplementedException();
+            _guideDal.Add(entity);
+            return new SuccessResult("Başarıyla Eklendi");
         }
 
         public IResult Delete(Guide entity)
