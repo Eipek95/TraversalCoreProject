@@ -1,15 +1,26 @@
 ﻿using Core.DataAccess.EntityFramework;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessLayer.Concrete.EntityFramework
 {
     public class EfGuideDal : EfEntityRepositoryBase<Guide, Context>, IGuideDal
     {
+        public void ChangeToGuideStatus(int id)
+        {
+            using (var c = new Context())
+            {
+                var getData = c.Guides.Find(id);
+                if (getData.Status == false)
+                {
+                    getData.Status = true;
+                }
+                else
+                {
+                    getData.Status = false;
+                }
+                c.SaveChanges();
+            }
+        }
     }
 }

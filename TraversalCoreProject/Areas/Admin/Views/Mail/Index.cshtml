@@ -1,0 +1,23 @@
+﻿@model EntityLayer.Dtos.MailRequestDto
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form method="post">
+    <div class="form-group">
+        @Html.Label("Alıcı Mail Adresi")
+        <input type="text" asp-for="RecieverMail" class="form-control" />
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.Label("Konu")
+        <input type="text" asp-for="Subject" class="form-control" />
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.Label("Mesaj İçeriği");
+        <textarea asp-for="Body" cols="30" rows="5" class="form-control" asp-for="Body"></textarea>
+    </div>
+    <button class="btn btn-outline-success">Mail Gönder</button>
+</form>

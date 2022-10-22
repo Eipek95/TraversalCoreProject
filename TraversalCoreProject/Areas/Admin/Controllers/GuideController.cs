@@ -59,12 +59,8 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
         }
         public IActionResult ChangeToGuideStatus(int id)
         {
-            var result = _guideService.Get(id);
-            if (result.Data.Status == true)
-                result.Data.Status = false;
-            else
-                result.Data.Status = true;
-            _guideService.Update(result.Data);
+
+            _guideService.ChangeToGuideStatus(id);
             return RedirectToAction("Index");
         }
     }

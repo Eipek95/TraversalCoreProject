@@ -24,6 +24,12 @@ namespace BusinessLayer.Concrete
             return new SuccessResult("Başarıyla Eklendi");
         }
 
+        public IResult ChangeToGuideStatus(int id)
+        {
+            _guideDal.ChangeToGuideStatus(id);
+            return new Result(true, "Durum Güncellendi");
+        }
+
         public IResult Delete(Guide entity)
         {
             throw new NotImplementedException();
