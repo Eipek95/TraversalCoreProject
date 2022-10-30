@@ -1,0 +1,87 @@
+﻿@model EntityLayer.Concrete.Guide
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>
+*@
+
+<div class="container-fluid mt--6">
+    <div class="row">
+        <div class="col-xl-12 order-xl-1">
+            <div class="card">
+               
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col-12">
+                                <h3 class="mb-0">@ViewData["Title"]</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="heading-small text-muted mb-4">Bilgiler</h6>
+                        <div class="pl-lg-4">
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="DeviceTypeId">Kişi Seçiniz</label>
+                                        <select class="form-control" id="GuideId" asp-for="@Model.GuideID"
+                                                asp-items="@(new SelectList(@ViewBag.message,"GuideID","Name"))" data-toggle="select">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row align-items-center">
+                            <div class="col-12 text-center">
+                            <button class="btn btn-outline-danger" id="btngetlist" type="button">Listeyi Getir</button>
+                            </div>
+                        </div>
+                    </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+
+    <script>
+        $(document).ready(function(){
+            $("#GuideId").change(function (){
+                var displayValue = document.getElementById("GuideId");
+                console.log(displayValue);
+               // alert("Seçilen isim : " + displayValue.options[displayValue.selectedIndex].value + " -->" + displayValue.options[displayValue.selectedIndex].text);
+               
+                swal(displayValue.options[displayValue.selectedIndex].text);
+            });
+        });
+    </script>
+    <script>
+        $("#btngetlist").click(function(){
+            $.ajax({
+                contentType:"application/json",
+                dataType:"json",
+                type:"Get",
+                url: "/ModalPopup/GetByID/",
+                success:function(func){
+                    console.log(func);
+                    let g=jQuery.parseJSON(func);
+                    swal(g.GuideID+" "+g.Name);
+                },
+                error:function(func){
+                    alert("hata");
+                }
+            });
+        });
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+}

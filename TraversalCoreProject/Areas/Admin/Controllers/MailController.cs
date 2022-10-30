@@ -40,5 +40,13 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             smtpClient.Disconnect(true);
             return View();
         }
+
+
+
+
+        public IActionResult Compose()
+        {
+            return View();
+        }
     }
 }

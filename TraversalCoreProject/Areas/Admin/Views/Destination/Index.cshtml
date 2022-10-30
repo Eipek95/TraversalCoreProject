@@ -1,33 +1,67 @@
-﻿ @using EntityLayer.Concrete
- @model List<Destination>
+﻿@using EntityLayer.Concrete
+@model List<Destination>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
 }
 
-<h1>Tur Rotaları</h1>
-
-<table class=" table table-bordered">
-    <tr>
-        <th>#</th>
-        <th>Şehir</th>
-        <th>Fiyat</th>
-        <th>Kapasite</th>
-        <th>Sitede Gör</th>
-        <th>Sil</th>
-        <th>Güncelle</th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.DestinationID</td>
-            <td>@item.City</td>
-            <td>@item.Price</td>
-            <td>@item.Capacity</td>
-            <td><a href="/Destination/DestinationDetails/@item.DestinationID" class="btn btn-outline-info">Sitede Gör</a></td>
-            <td><a href="/Admin/Destination/DeleteDestination/@item.DestinationID" class="btn btn-outline-danger">Sil</a></td>
-            <td><a href="/Admin/Destination/UpdateDestination/@item.DestinationID" class="btn btn-outline-success">Güncelle</a></td>
-           </tr>
+<style>
+    tbody tr:hover {
+        background-color: rgb(105, 108, 255);
+        color: #ffff;
     }
-</table>
-<a href="/Admin/Destination/AddDestination" class="btn btn-outline-primary">Yeni Tur Rotası</a>
+</style>
+
+<div class="card" style="background-color:transparent">
+    <h5 class="card-header">Tur Rotaları</h5>
+    <div class="card-body">
+        <div class="table-responsive text-nowrap">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Şehir</th>
+                        <th>Fiyat</th>
+                        <th>Kapasite</th>
+                        <th>Seçenekler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        count = count + 1;
+                        <tr>
+                            <td>
+                                <i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>@count</strong>
+                            </td>
+                            <td>@item.City</td>
+                            <td>@item.Price</td>
+                            <td>@item.Capacity</td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button"
+                                        class="btn p-0 dropdown-toggle hide-arrow"
+                                        data-bs-toggle="dropdown">
+                                        <i class="bx bx-dots-vertical-rounded" style="color:black"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="/Admin/Destination/UpdateDestination/@item.DestinationID" ><i class="bx bx-edit-alt me-1"></i> Düzenle</a>
+                                        <a class="dropdown-item" href="/Admin/Destination/DeleteDestination/@item.DestinationID"><i class="bx bx-trash me-1"></i> Sil</a>
+                                        <a class="dropdown-item" href="/Destination/DestinationDetails/@item.DestinationID"><i class="bx bxs-arrow-from-right me-1"></i> Siteye Git</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<br />
+
+<a class="btn btn-outline-primary" href="/Admin/Destination/AddDestination"><i class="bx bx-add-to-queue"></i> Yeni Tur Rotası Ekle</a>
+
+
