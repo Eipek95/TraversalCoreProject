@@ -50,34 +50,43 @@
             </div>
         </div>
     </div>
+
 </div>
 @section Scripts{
 
     <script>
-        $(document).ready(function(){
-            $("#GuideId").change(function (){
-                var displayValue = document.getElementById("GuideId");
-                console.log(displayValue);
-               // alert("Seçilen isim : " + displayValue.options[displayValue.selectedIndex].value + " -->" + displayValue.options[displayValue.selectedIndex].text);
+        //dynamic select list get data
+        //$(document).ready(function(){
+        //    $("#GuideId").change(function (){
+        //        var displayValue = document.getElementById("GuideId");
+        //        console.log(displayValue);
+        //       // alert("Seçilen isim : " + displayValue.options[displayValue.selectedIndex].value + " -->" + displayValue.options[displayValue.selectedIndex].text);
                
-                swal(displayValue.options[displayValue.selectedIndex].text);
-            });
-        });
+        //        swal(displayValue.options[displayValue.selectedIndex].text);
+        //    });
+        //});
     </script>
     <script>
         $("#btngetlist").click(function(){
+            var displayValue = document.getElementById("GuideId");
+            let gid=displayValue.options[displayValue.selectedIndex].value;
+            console.log(gid);
             $.ajax({
+                
                 contentType:"application/json",
                 dataType:"json",
                 type:"Get",
                 url: "/ModalPopup/GetByID/",
+                data:{id:gid},
                 success:function(func){
                     console.log(func);
                     let g=jQuery.parseJSON(func);
-                    swal(g.GuideID+" "+g.Name);
+                    let getValue='<b>deneme</b>'
+                    swal(g.GuideID+" "+g.Name+" "+g.Description+getValue.html);
+
                 },
                 error:function(func){
-                    alert("hata");
+                    swal("hata","hatalı alan","error");
                 }
             });
         });
@@ -85,3 +94,5 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 }
+
+                    

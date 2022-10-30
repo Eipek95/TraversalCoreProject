@@ -22,16 +22,16 @@ namespace TraversalCoreProject.Controllers
         {
             List<Guide> guides = new List<Guide>();
             guides = _guideService.GetAll().Data;
-            guides.Insert(0, new Guide { GuideID = 0, Name = "--Lütfen bir isim seçiniz--" });
+            //guides.Insert(0, new Guide { GuideID = 0, Name = "--Lütfen bir isim seçiniz--" });
             ViewBag.message = guides;
             return View();
             //var result = _guideService.GetAll();
             //return View(result.Data);
         }
         [HttpGet]
-        public IActionResult GetById()
+        public IActionResult GetById(int id)
         {
-            int id = 2;
+
             var result = _guideService.Get(id);
             var jsonGuide = JsonConvert.SerializeObject(result.Data);
             return Json(jsonGuide);
