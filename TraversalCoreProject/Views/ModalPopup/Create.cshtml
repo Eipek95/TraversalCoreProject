@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div>
+    <h2>Id</h2>-<h2 id="stdId"></h2>
+    <h2>Name</h2>-<h2 id="stdName"></h2>
+    <h2>Email</h2>-<h2 id="stdEmail"></h2>
+
+    <input type="button" value="Click Me" onclick="BtnClick()"/>
+</div>
+<script>
+    function BtnClick(){
+        $.ajax({
+            url: "/ModalPopup/Create2",
+            method:"GET",
+            success:function(data)
+            {
+                data=JSON.parse(data);
+                for(i=0;i<data.length;i++)
+                console.log(data[i].GuideID+" "+data[i].Name);
+            },
+            error:function(err){
+                console.error(err);
+            }
+        })
+    }
+</script>

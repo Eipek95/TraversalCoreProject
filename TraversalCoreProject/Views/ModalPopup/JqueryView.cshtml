@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "JqueryView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body>
+    <h1 class="result">JqueryView</h1>
+
+    <p>Mi, id sollicitudin urna fermentum ut fusce varius nisl ac ipsum gravida vel pretium tellus.</p>
+    <p class="result">Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.</p>
+</body>
+<ul>
+    <li>jq</li>
+    <li>li</li>
+    <li>de</li>
+    <li>f</li>
+</ul>
+<ul>
+    <li>jq</li>
+    <li>li2</li>
+    <li>de3</li>
+    <li>f4</li>
+</ul>
+<button class="btn btn-primary" type="button">ilk listenin ilk elemanını gizle!!</button>
+
+<footer>
+    @section Scripts{
+        <script>
+            $('document').ready(function () {
+                $('button').click(function () {
+                    $('button').hide();
+                });
+            });
+        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    }
+        @*
+    ister  $('document').ready(function () ister function ()
+    . ---->class
+    # ----->id
+    * ---> body içindeki bütün elementlere ulaş
+    this--->varsayılan element buttonsa button
+    p.result ---> p içindeki resultlara uygula
+    p:first---->sayfadaki ilk paragraf
+    ul li:first-child ---->sayfadaki ul lerin ilk elemanı
+    *@
+    </footer>

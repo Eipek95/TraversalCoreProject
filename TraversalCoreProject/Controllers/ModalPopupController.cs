@@ -1,12 +1,14 @@
 ﻿using BusinessLayer.Abstract;
 using DataAccessLayer.Concrete.EntityFramework;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace TraversalCoreProject.Controllers
 {
+    [AllowAnonymous]
     public class ModalPopupController : Controller
     {
         private readonly IGuideService _guideService;
@@ -36,8 +38,29 @@ namespace TraversalCoreProject.Controllers
             var jsonGuide = JsonConvert.SerializeObject(result.Data);
             return Json(jsonGuide);
         }
-        [HttpPost]
-        public IActionResult ListAsync()
+        public IActionResult popupIndex()
+        {
+            return View();
+        }
+        public IActionResult JqueryView()
+        {
+            return View();
+        }
+        public IActionResult JqueryView2()
+        {
+            return View();
+        }
+        public IActionResult Create()
+        {
+            return View();
+        }
+        public IActionResult Create2()
+        {
+            var result = _guideService.GetAll();
+            var jsonGuide = JsonConvert.SerializeObject(result.Data);
+            return Json(jsonGuide);
+        }
+        public IActionResult actionResult()
         {
             return View();
         }

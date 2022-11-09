@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "JqueryView2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>JqueryView2</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Software</th>
+        <th>Language</th>
+    </tr>
+    <tr>
+        <td>Javascript</td>
+        <td>English</td>
+    </tr>
+    <tr>
+        <td>Python</td>
+        <td>English</td>
+    </tr>
+    <tr>
+        <td>Java</td>
+        <td>English</td>
+    </tr>
+    <tr>
+        <td>C#</td>
+        <td>English</td>
+    </tr>
+</table>
+<button  class="btn btn-danger" id="evenBtn">Çift Sayıdaki satırların rengini değiştir</button>
+<button  class="btn btn-success" id="oddBtn">Tek Sayıdaki satırların rengini değiştir</button>
+
+@section Scripts{
+    <script>
+        $(function () {
+            $('button').click(function () {
+                $('tr:even').css("background-color","green");
+            });
+           
+        });
+        $(function () {
+            
+            $('.oddBtn').click(function () {
+                $('tr:odd').css("background-color", "green");
+            });
+        });
+    </script>
+
+
+}
