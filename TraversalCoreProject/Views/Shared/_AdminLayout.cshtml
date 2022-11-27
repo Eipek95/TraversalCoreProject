@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 <!DOCTYPE html>
@@ -15,7 +14,7 @@
 @await Html.PartialAsync("/Views/Admin/PartialHeader.cshtml")
 
 <body>
-    
+
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
 
@@ -28,34 +27,35 @@
                 @await Html.PartialAsync("/Views/Admin/PartialSidebar.cshtml")
 
             </aside>
-           
+
             <div class="layout-page">
-                
+
                 @await Html.PartialAsync("/Views/Admin/PartialNavbar.cshtml")
 
-                
+
                 <div class="content-wrapper">
-               
+
 
                     <div class="container-xxl flex-grow-1 container-p-y">
                         @RenderBody()
                     </div>
-                    
-                @await Html.PartialAsync("/Views/Admin/PartialFooter.cshtml")
-                    
-             
+
+                    @await Html.PartialAsync("/Views/Admin/PartialFooter.cshtml")
+
+
 
                     <div class="content-backdrop fade"></div>
                 </div>
-                
+
             </div>
 
         </div>
-       
+
         <div class="layout-overlay layout-menu-toggle"></div>
     </div>
 
-@await Html.PartialAsync("/Views/Admin/PartialScript.cshtml")
-   
+    @await Html.PartialAsync("/Views/Admin/PartialScript.cshtml")
+    @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

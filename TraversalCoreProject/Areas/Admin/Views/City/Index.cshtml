@@ -1,10 +1,9 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 
 <h1>Şehir Ülke İşlemleri</h1>
 
@@ -26,6 +25,18 @@
     <input type="text" id="txtid" placeholder="Şehir ID değerini giriniz" class="form-control" />
 </div>
 <br />
+<div>
+    <input type="text" id="txtcityid" placeholder="Silinecek Şehir ID değerini giriniz" class="form-control" />
+</div>
+<br />
+<div>
+    <input type="text" id="txtcityeditid" placeholder="Güncellenecek Şehir ID değerini giriniz" class="form-control" />
+    <br />
+    <input type="text" id="txtcityname" placeholder="Güncellenecek Şehir Adı değerini giriniz" class="form-control" />
+    <br />
+    <input type="text" id="txtdaynight" placeholder="Güncellenecek Gün Gece değerini giriniz" class="form-control" />
+</div>
+<br />
 <div id="destinationlistbyid">
 </div>
 <br />
@@ -38,70 +49,131 @@
     <br />
     <input type="text" id="txtcapacity" placeholder="Konaklayacak kişi sayısı" class="form-control" />
 </div>
-<script>
-    $("#btngetlist").click(function () {
-        $.ajax({
-            contentType: "application/json",
-            dataType: "json",
-            type: "Get",
-            url: "/Admin/City/CityList/",
-            success: function (func) {
-                let w = jQuery.parseJSON(func);
-                console.log(w);
-                let tablehtml = "<table class=table table-bordered> <tr><th> Şehir Adı </th> <th> Gün-Gece </th> <th> Fiyatı </th> </tr>";
-                $.each(w, (index, value) => {
-                    tablehtml += `<tr><td>${value.City}</td> <td>${value.DayNight}</td> <td> ${value.Price} ₺ </td> </tr>`
+
+
+
+@section Scripts{
+    <script>
+        $("#btngetlist").click(function () {
+            $.ajax({
+                contentType: "application/json",
+                dataType: "json",
+                type: "Get",
+                url: "/Admin/City/CityList/",
+                success: function (func) {
+                    let w = jQuery.parseJSON(func);
+                    console.log(w);
+                    let tablehtml = "<table class=table table-bordered> <tr><th> Şehir Adı </th> <th> Gün-Gece </th> <th> Fiyatı </th> </tr>";
+                    $.each(w, (index, value) => {
+                        tablehtml += `<tr><td>${value.City}</td> <td>${value.DayNight}</td> <td> ${value.Price} ₺ </td> </tr>`
+                    });
+                    tablehtml += "</table>";
+                    $("#citylist").html(tablehtml);
+                }
+            });
+        });
+
+        $("#btnaddcity").click(function () {
+            let cityvalues = {
+                City: $("#txtcity").val(),
+                DayNight: $("#txtdaynight").val(),
+                Price: $("#txtprice").val(),
+                Capacity: $("#txtcapacity").val()
+            };
+            $.ajax({
+                type: "post",
+                url: "/Admin/City/AddCityDestination/",
+                data: cityvalues,
+                success: function (func) {
+                    let result = jQuery.parseJSON(func);
+                    swal({
+                        title: "Başarılı!",
+                        text: "Şehir Eklendi",
+                        icon: "success",
+                        button: "Tamam",
+                    });
+                }
+            });
+        });
+
+
+        $("#btngetbyid").click(x => {
+            let id = $("#txtid").val();
+            $.ajax({
+                contentType: "application/json",
+                dataType: "json",
+                type: "Get",
+                url: "/Admin/City/GetById/",
+                data: { DestinationID: id },
+                success: function (fun2) {
+                    let result = jQuery.parseJSON(fun2);
+                    console.log(result);
+                    let htmlstr = `<table class=table table-bordered><tr><th>Şehir Adı</th><th>Gün-Gece</th><th>Fiyatı</th></tr><tr><td>${result.City}</td><td>${result.DayNight}</td><td>${result.Capacity}</td></tr></table>`;
+                    $("#destinationlistbyid").html(htmlstr);
+                }
+            });
+
+        });
+
+
+        $("#btndeletecity").click(x => {
+            let id = $("#txtcityid").val();
+            swal({
+                title: "Kayıtı silmek istediğinizden emin misiniz?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                buttons: ["Vazgeç", "Sil"],
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: '/Admin/City/DeleteCity/' + id,
+                            type: 'POST',
+                            success: function (result) {
+                                console.log(result);
+                                if (result.status == 1) {
+                                    swal({
+                                        title: "Kayıt Başarıyla Silindi",
+                                        icon: "success",
+                                        button: "Tamam",
+                                    }).then(function () {
+                                        location.reload();
+                                    });
+                                }
+                            }
+                        });
+
+                    } else {
+                        swal({
+                            title: result.ErrorMessage,
+                            icon: "error",
+                            button: "Tamam",
+                        });
+                    }
                 });
-                tablehtml += "</table>";
-                $("#citylist").html(tablehtml);
-            }
         });
-    });
 
-    $("#btnaddcity").click(function () {
-        let cityvalues = {
-            City: $("#txtcity").val(),
-            DayNight: $("#txtdaynight").val(),
-            Price: $("#txtprice").val(),
-            Capacity: $("#txtcapacity").val()
-        };
-        $.ajax({
-            type: "post",
-            url: "/Admin/City/AddCityDestination/",
-            data: cityvalues,
-            success: function (func) {
-                let result = jQuery.parseJSON(func);
-                swal({
-                    title: "Başarılı!",
-                    text: "Şehir Eklendi",
-                    icon: "success",
-                    button: "Tamam",
-                });
-            }
+        $("#btnupdatecity").click(function () {
+            let values = {
+                DestinationID: $("#txtcityeditid").val(),
+                City: $("#txtcityname").val(),
+                DayNight: $("#txtdaynight").val()
+            };
+            $.ajax({
+                type: "post",
+                url: "/Admin/City/UpdateCity",
+                data: values,
+                success: function (fun4) {
+                    alert("Güncelleme işlemi yapıldı");
+                }
+            });
         });
-    });
+    </script>
 
 
-    $("#btngetbyid").click(x => {
-        let id = $("#txtid").val();
-        $.ajax({
-            contentType: "application/json",
-            dataType: "json",
-            type: "Get",
-            url: "/Admin/City/GetById/",
-            data: { DestinationID: id },
-            success: function (fun2) {
-                let result = jQuery.parseJSON(fun2);
-                console.log(result);
-                let htmlstr = `<table class=table table-bordered><tr><th>Şehir Adı</th><th>Gün-Gece</th><th>Fiyatı</th></tr><tr><td>${result.City}</td><td>${result.DayNight}</td><td>${result.Capacity}</td></tr></table>`;
-                $("#destinationlistbyid").html(htmlstr);
-            }
-        });
-    });
-</script>
+    <!--``---altgr+noktalı virgül -->
 
-
-<!--``---altgr+noktalı virgül -->
-
-
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+}

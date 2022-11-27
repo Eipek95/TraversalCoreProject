@@ -1,7 +1,11 @@
 using BusinessLayer.Container;
+using BusinessLayer.ValidationRules;
 using DataAccessLayer.Concrete.EntityFramework;
+using DTOLayer.DTOs.AnnouncementDTOs;
 using EntityLayer.Concrete;
 using EntityLayer.Dtos;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.IO;
+
 
 namespace TraversalCoreProject
 {
@@ -40,6 +45,10 @@ namespace TraversalCoreProject
 
 
             services.ContainerDependencies();
+
+            services.AddAutoMapper(typeof(Startup));//add auto mapper
+            services.AddTransient<IValidator<AnnouncementAddDTO>, AmouncementValidator>();
+            services.AddControllersWithViews().AddFluentValidation();
 
             services.AddMvc(config =>
             {

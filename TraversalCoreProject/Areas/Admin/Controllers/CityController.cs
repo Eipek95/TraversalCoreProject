@@ -2,6 +2,7 @@
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System;
 
 namespace TraversalCoreProject.Areas.Admin.Controllers
 {
@@ -30,12 +31,34 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             return Json(result);
         }
 
-        public IActionResult GetById(int id)
+        public IActionResult GetById(int DestinationID)
         {
-            var result = _destinationService.Get(id);
+            var result = _destinationService.Get(DestinationID);
             var jsonValues = JsonConvert.SerializeObject(result.Data);
             return Json(jsonValues);
         }
+        [HttpPost]
+        public IActionResult DeleteCity(int id)
+        {
+            try
+            {
+                var values = _destinationService.Get(id);
+                _destinationService.Delete(values.Data);
+                return Json(new { Status = 1 });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Status = 0, Errormessage = ex.Message });
+            }
 
+        }
+        [HttpPost]
+        public IActionResult UpdateCity(Destination destination)
+        {
+            var values = _destinationService.Get(destination.DestinationID);
+            _destinationService.Update(destination);
+            var jvalues = JsonConvert.SerializeObject(destination);
+            return View(jvalues);
+        }
     }
 }

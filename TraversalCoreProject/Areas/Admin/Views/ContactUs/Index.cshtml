@@ -1,0 +1,73 @@
+﻿@model List<ContactUs>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+
+}
+
+
+<h1>Bize Ulaşın Mesajları</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Gönderen</th>
+        <th>Konu</th>
+        <th>Tarih</th>
+        <th>Sil</th>
+        <th>Mesaj Aç</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        count++;
+        <tr>
+            <th>@count</th>
+            <th>@item.Name</th>
+            <th>@item.Subject</th>
+            <th>@item.MessageDate.ToString("dd.MMM.yyyy")</th>
+            <th><a href="#" class="btn btn-outline-danger">Sil</a></th>
+            <th><a href="#" class="btn btn-outline-dark" onclick="EditPassword(@item.ContactUsID)">Mesajı Göster</a></th>
+        </tr>
+    }
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <textarea id="MessageBody" class="form-control" disabled></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script>
+        function EditPassword(id) {
+            $.ajax({
+                contentType: "application/json",
+                dataType: "json",
+                type: "Get",
+                url: "/Admin/ContactUs/MessageDetails/",
+                data: { ContactUsID: id },
+                success: function (fun2) {
+                    let result = jQuery.parseJSON(fun2);
+                    $("#exampleModalLabel").text(result.Name+" adlı kişiden gelen mesaj");
+                    $("#MessageBody").val(result.MessageBody);
+                }
+            });
+            
+            $("#exampleModal").modal('show');
+        }
+        
+    </script>
+}
