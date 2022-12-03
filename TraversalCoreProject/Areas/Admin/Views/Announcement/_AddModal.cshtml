@@ -1,0 +1,56 @@
+﻿
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="AnnouncementForm" class="needs-validation" novalidate>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="Title" class="col-form-label">Duyuru Başlığı</label>
+                            <input type="text" id="Title" name="Title" class="form-control" autocomplete="off" required />
+                            <div class="invalid-feedback">
+                                Lütfen Başlığı boş geçmeyiniz
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label" for="Content">Duyuru İçeriği</label>
+                            <input type="text" id="Content" name="Content" class="form-control" autocomplete="off" required />
+                            <div class="invalid-feedback">
+                                Lütfen Duyuruyu boş geçmeyiniz
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-primary">Duyuruyu Oluştur</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    (() => {
+        'use strict'
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>

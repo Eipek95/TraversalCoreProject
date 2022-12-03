@@ -1,25 +1,165 @@
-﻿@model List<AnnoucementListViewModel>
+﻿@model List<AnnoucementListDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
-
-
-<table class="table table-bordered">
-    <tr>
-        <th>#</th>
-        <th>Başlık</th>
-        <th>İçerik</th>
-        <th>Detaylar</th>
-    </tr>
-    @foreach (var item in Model)
-    {
+<div class="container" style="border:dashed">
+    <div class="row" style="text-align:center">
+        <h5>Tarihe Göre Duyuru Arama</h5>
+    </div>
+    <hr />
+    <div class="row">
+        <div id="dateList">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label>Başlangıç Tarih</label>
+            <input type="date" id="dateStart" class="form-control">
+        </div>
+        <div class="col-md-6">
+            <label>Bitiş Tarih</label>
+            <input type="date" id="dateEnd" class="form-control">
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <button class="btn btn-outline-dark" id="btngetlist">Duyuru Getir</button>
+    </div>
+    <br />
+</div>
+<br />
+<br />
+<div class="container">
+    <table class="table table-bordered">
         <tr>
-            <td>@item.ID</td>
-            <td>@item.Title</td>
-            <td>@item.Content</td>
-            <td><a href="#" class="btn btn-outline-dark">Detaylar</a></td>
+            <th>#</th>
+            <th>Başlık</th>
+            <th>İçerik</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+            <th>Detaylar</th>
         </tr>
-    }
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.AmouncementID</td>
+                <td>@item.Title</td>
+                <td>@item.Content</td>
+                <td><button onclick="DeleteAmouncement(@item.AmouncementID)" class="btn btn-outline-danger">Sil</button></td>
+                <td><a href="/Admin/Announcement/UpdateAnnouncement/@item.AmouncementID" class="btn btn-outline-success">Güncelle</a></td>
+                <td><a href="#" class="btn btn-outline-dark">Detaylar</a></td>
+            </tr>
+        }
+    </table>
+
+
+    <button type="button" class="btn btn-primary" onclick="AddAmouncement()">
+        Duyuru Ekle
+    </button>
+</div>
+@{
+    await Html.RenderPartialAsync("_AddModal");
+}
+
+@section Scripts{
+
+    <script>
+        $("#btngetlist").click(x => {
+
+            var dateStartx = $("#dateStart").val();
+            var dateEndx = $("#dateEnd").val();
+            $.ajax({
+                contentType: "application/json",
+                dataType: "json",
+                type: "get",
+                url: "/Admin/Announcement/Deneme/",
+                data: {
+                    dateTime1: dateStartx,
+                    dateTime2: dateEndx
+                },
+                success: function (fun2) {
+                    let result = jQuery.parseJSON(fun2);
+                    console.log(result);
+                    let tablehtml = "<table class=table table-bordered> <tr><th> Başlık</th> <th>İçerik </th></tr>";
+                    $.each(result, (index, value) => {
+                        tablehtml += `<tr><td>${value.Title}</td> <td>${value.Content}</td></tr>`
+                    });
+                    tablehtml += "</table>";
+                    $("#dateList").html(tablehtml);
+                }
+            });
+
+        });
+    </script>
+    <script>
+        function AddAmouncement() {
+            $("#exampleModal").modal('show');
+            initModal();
+        }
+        function initModal() {
+
+            $('#AnnouncementForm').on('submit', function (e) {
+                e.preventDefault();
+                let model = {
+                    Title: $("#Title").val(),
+                    Content: $("#Content").val(),
+                };
+                $.ajax({
+                    type: "post",
+                    url: "/Admin/Announcement/AddAnnouncement",
+                    data: model,
+                    success: function (func) {
+                        $("#exampleModal").modal('toggle');
+                        swal({
+                            title: "işlem Başarıyla Gerçekleşti",
+                            icon: "success",
+                            button: "Tamam",
+                        }).then(function () {
+                            location.reload();
+                        });
+                    }
+                });
+            });
+        }
+    </script>
+    <script>
+        function DeleteAmouncement(id) {
+            swal({
+                title: "Kayıtı silmek istediğinizden emin misiniz?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                buttons: ["Vazgeç", "Sil"],
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: '/Admin/Announcement/DeleteAnnouncement/' + id,
+                            type: 'POST',
+                            success: function (result) {
+                                console.log(result);
+                                if (result.status == 1) {
+                                    swal({
+                                        title: "Kayıt Başarıyla Silindi",
+                                        icon: "success",
+                                        button: "Tamam",
+                                    }).then(function () {
+                                        location.reload();
+                                    });
+                                }
+                            }
+                        });
+
+                    } else {
+                        swal({
+                            title: result.ErrorMessage,
+                            icon: "error",
+                            button: "Tamam",
+                        });
+                    }
+                });
+        }
+    </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+}
