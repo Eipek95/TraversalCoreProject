@@ -102,5 +102,11 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
             var jsonCity = JsonConvert.SerializeObject(values);
             return Json(jsonCity);
         }
+
+
+        public IActionResult Deneme()
+        {
+            return View();
+        }
     }
 }
