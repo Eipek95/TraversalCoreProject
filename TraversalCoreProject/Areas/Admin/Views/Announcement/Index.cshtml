@@ -3,7 +3,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<div class="container" style="border:dashed">
+<div class="container" style="border:dashed" id="getDataByDate">
     <div class="row" style="text-align:center">
         <h5>Tarihe Göre Duyuru Arama</h5>
     </div>
@@ -28,7 +28,6 @@
     </div>
     <br />
 </div>
-<br />
 <br />
 <div class="container">
     <table class="table table-bordered">
@@ -57,13 +56,29 @@
     <button type="button" class="btn btn-primary" onclick="AddAmouncement()">
         Duyuru Ekle
     </button>
+    <button type="button" class="btn btn-success" onclick="dateFunction()">
+        Tarihe Göre Filtrele
+    </button>
 </div>
 @{
     await Html.RenderPartialAsync("_AddModal");
 }
 
 @section Scripts{
-
+    <script>
+        $(function () {
+            var x = document.getElementById("getDataByDate");
+            x.style.display="none";
+        });
+        function dateFunction() {
+            var x = document.getElementById("getDataByDate");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
     <script>
         $("#btngetlist").click(x => {
 
@@ -73,7 +88,7 @@
                 contentType: "application/json",
                 dataType: "json",
                 type: "get",
-                url: "/Admin/Announcement/Deneme/",
+                url: "/Admin/Announcement/GetDataByDate/",
                 data: {
                     dateTime1: dateStartx,
                     dateTime2: dateEndx
@@ -81,12 +96,22 @@
                 success: function (fun2) {
                     let result = jQuery.parseJSON(fun2);
                     console.log(result);
-                    let tablehtml = "<table class=table table-bordered> <tr><th> Başlık</th> <th>İçerik </th></tr>";
-                    $.each(result, (index, value) => {
-                        tablehtml += `<tr><td>${value.Title}</td> <td>${value.Content}</td></tr>`
-                    });
-                    tablehtml += "</table>";
-                    $("#dateList").html(tablehtml);
+                    if (result.length > 0) {
+                        let tablehtml = "<table class=table table-bordered> <tr><th> Başlık</th> <th>İçerik </th></tr>";
+                        $.each(result, (index, value) => {
+                            tablehtml += `<tr><td>${value.Title}</td> <td>${value.Content}</td></tr>`
+                        });
+                        tablehtml += "</table>";
+                        $("#dateList").html(tablehtml);
+                    }
+                    else {
+                        let tablehtml = "<table class=table table-bordered> <tr><th> Başlık</th> <th>İçerik </th></tr>";
+
+                        tablehtml += `<tr><td><h5>Gösterilecek Veri Yok</h5></td></tr>`
+
+                        tablehtml += "</table>";
+                        $("#dateList").html(tablehtml);
+                    }
                 }
             });
 

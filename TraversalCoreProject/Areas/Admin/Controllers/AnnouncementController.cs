@@ -95,7 +95,7 @@ namespace TraversalCoreProject.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Deneme(DateTime dateTime1, DateTime dateTime2)
+        public IActionResult GetDataByDate(DateTime dateTime1, DateTime dateTime2)
         {
             var c = new Context();
             var values = c.Announcements.Where(x => x.Date < dateTime2 && x.Date > dateTime1).ToList();
